@@ -1,0 +1,10 @@
+grammar Doksi
+  content <- element ((nl element %elementWithNL)* %elements) %content
+  element <- _ head? _ lineContent? _ %element
+  lineContent <- word ((__ word %wordWithWS)* %words) %lineContent
+  head <- tagName ":" %head
+  tagName <- [^ \n:]+ %tagName
+  word <- [^ \n]+ %word
+  nl <- [\n]
+  _ <- [ ]* %ws
+  __ <- [ ]+ %ws
